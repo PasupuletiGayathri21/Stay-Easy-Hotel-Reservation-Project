@@ -1,0 +1,4 @@
+Booking ID,Guest Name,Mobile Number,Room Type,Number of Guests,Booking Date,Check-in,Check-out,Room Number,Status,Total Payment
+1,rahul,8555968627,standard,2,2026-11-08,2026-11-15,2026-11-18,101,CHECKED_OUT,10752
+2,rahul,8555968627,standard,2,2026-11-09,2026-11-10,2026-11-12,101,CONFIRMED,7168
+3,ravi,9123456785,standard,2,2026-11-09,2026-11-20,2026-11-22,101,CANCELLED,6720
