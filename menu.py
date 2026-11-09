@@ -376,7 +376,7 @@ def view_booking_details():
         print("Booking not found")
         return
 
-    print("\n------ BOOKING DETAILS ------")
+    print(" BOOKING DETAILS)
     print("Booking ID:", booking[0])
     print("Mobile Number:", booking[1])
     print("Room Type:", booking[2])
@@ -431,20 +431,14 @@ def generate_invoice(booking_id):
     if record is None:
         print("Invoice details not found")
         return
-
     os.makedirs("invoices", exist_ok=True)
-
     invoice_path = os.path.join("invoices", f"BK{booking_id}.txt")
-
     checkin_date = datetime.strptime(record[7], "%Y-%m-%d").date()
     checkout_date = datetime.strptime(record[8], "%Y-%m-%d").date()
-
     nights = (checkout_date - checkin_date).days
-
     with open(invoice_path, "w") as file:
-        file.write("========== STAYEASY HOTEL ==========\n")
-        file.write("             GUEST INVOICE\n")
-        file.write("------------------------------------\n")
+        file.write("STAYEASY HOTEL")
+        file.write(" GUEST INVOICE")
         file.write(f"Invoice Number : BK{record[0]}\n")
         file.write(f"Guest Name     : {record[1]}\n")
         file.write(f"Mobile Number  : {record[2]}\n")
@@ -456,63 +450,48 @@ def generate_invoice(booking_id):
         file.write(f"Check-in       : {record[7]}\n")
         file.write(f"Check-out      : {record[8]}\n")
         file.write(f"Total Nights   : {nights}\n")
-        file.write("------------------------------------\n")
         file.write(f"Total Amount   : Rs. {record[10]}\n")
-        file.write("------------------------------------\n")
         file.write("       THANK YOU FOR STAYING!\n")
 
     print("Invoice generated successfully!")
     print("Invoice saved at:", invoice_path)
 def cancel_booking():
     booking_id = input("Enter booking ID: ").strip()
-
     if not booking_id.isdigit():
         print("Booking ID must be numeric")
         return
-
     booking = get_booking_details(int(booking_id))
-
     if booking is None:
         print("Booking not found")
         return
-
     if booking[8] != "CONFIRMED":
         print("Only confirmed bookings can be cancelled")
         return
-
     checkin_date = datetime.strptime(booking[5], "%Y-%m-%d").date()
     today = date.today()
-
     days_remaining = (checkin_date - today).days
-
     if days_remaining >= 7:
         refund_percentage = 100
     elif days_remaining >= 2:
         refund_percentage = 50
     else:
         refund_percentage = 0
-
     refund_amount = booking[9] * refund_percentage // 100
-
     cancel_booking_status(int(booking_id))
-
     print("Booking cancelled successfully!")
     print("Total Amount:", booking[9])
     print("Refund Percentage:", refund_percentage, "%")
     print("Refund Amount: Rs.", refund_amount)
-
 def occupancy_report():
     total_rooms = len(valid_rooms)
     occupied_rooms = get_occupancy_data()
     available_rooms_count = total_rooms - occupied_rooms
-
     if total_rooms == 0:
         print("No valid rooms available")
         return
-
     occupancy_percentage = (occupied_rooms / total_rooms) * 100
 
-    print("\n------ OCCUPANCY REPORT ------")
+    print("OCCUPANCY REPORT")
     print("Total Rooms:", total_rooms)
     print("Occupied Rooms:", occupied_rooms)
     print("Available Rooms:", available_rooms_count)
@@ -520,7 +499,7 @@ def occupancy_report():
 def revenue_report():
     total_bookings, total_revenue = get_revenue_data()
 
-    print("\n------ REVENUE REPORT ------")
+    print("REVENUE REPORT ")
     print("Total Bookings:", total_bookings)
     print("Total Booking Revenue: Rs.", total_revenue)
 def export_bookings():
@@ -529,10 +508,8 @@ def export_bookings():
     if not bookings:
         print("No bookings available to export")
         return
-
     with open("bookings_export.csv", "w", newline="") as file:
         writer = csv.writer(file)
-
         writer.writerow([
             "Booking ID",
             "Guest Name",
@@ -563,9 +540,7 @@ def guest_stay_history():
     if not history:
         print("No booking history found")
         return
-
-    print("\n---------- GUEST STAY HISTORY ----------")
-
+    print("GUEST STAY HISTORY ")
     for record in history:
         print("\nBooking ID:", record[0])
         print("Room Type:", record[1])
